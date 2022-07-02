@@ -2,7 +2,7 @@ import axios from "axios";
 import { Router } from "express";
 import { getApp } from "firebase/app";
 
-import { validator } from "../middlewares/validator";
+import { validator } from "../middlewares/validator.js";
 
 const router = Router();
 const handler = router.route('/token');

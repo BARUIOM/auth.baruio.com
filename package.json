@@ -6,7 +6,7 @@
     "type": "module",
     "scripts": {
         "build": "tsc",
-        "dev": "node --experimental-specifier-resolution=node --loader ts-node/esm src/index.ts"
+        "dev": "node --loader ts-node/esm src/index.ts"
     },
     "repository": {
         "type": "git",

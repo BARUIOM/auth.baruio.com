@@ -5,8 +5,8 @@ import express from "express";
 import { initializeApp as FirebaseWeb } from "firebase/app";
 import { initializeApp as FirebaseAdmin, applicationDefault } from "firebase-admin/app";
 
-import SignInService from "./services/SignInService";
-import TokenService from "./services/TokenService";
+import SignInService from "./services/SignInService.js";
+import TokenService from "./services/TokenService.js";
 
 FirebaseAdmin({ credential: applicationDefault() });
 FirebaseWeb({ apiKey: process.env['FIREBASE_API_KEY'] });

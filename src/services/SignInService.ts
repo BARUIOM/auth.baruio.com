@@ -2,7 +2,7 @@ import { Router } from "express";
 import { FirebaseError } from "firebase/app";
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 
-import { validator } from "../middlewares/validator";
+import { validator } from "../middlewares/validator.js";
 
 const router = Router();
 const handler = router.route('/sign-in');
