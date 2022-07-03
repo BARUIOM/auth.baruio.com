@@ -1,8 +1,8 @@
-import axios from "axios";
 import { Router } from "express";
 import { getApp } from "firebase/app";
 
 import { validator } from "../middlewares/validator.js";
+import { OAuthHandler, TokenExchangeError } from "../modules/OAuthHandler.js";
 
 const router = Router();
 const handler = router.route('/token');
@@ -45,25 +45,15 @@ const schema = {
     ]
 };
 
-class TokenExchangeError extends Error { }
+const oauth = new OAuthHandler('https://securetoken.googleapis.com/v1/token');
 
 const exchangeRefreshToken = async (refreshToken: string) => {
-    const payload = {
-        grant_type: 'refresh_token',
-        refresh_token: refreshToken
-    };
-
     const { options: { apiKey: key } } = getApp();
-    const response = await axios.post('https://securetoken.googleapis.com/v1/token', payload, { params: { key } })
-        .catch(e => { throw new TokenExchangeError(e) });
 
-    if (response.status === 200)
-        return {
-            accessToken: response.data['access_token'],
-            refreshToken: response.data['refresh_token']
-        };
-
-    throw new TokenExchangeError('Unable to refresh user token');
+    return oauth.exchangeRefreshToken({
+        grant_type: 'refresh_token',
+        refresh_token: refreshToken,
+    }, { params: { key } });
 };
 
 handler.post(validator(schema), async (req, res) => {
