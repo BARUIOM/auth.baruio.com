@@ -7,6 +7,8 @@ import { initializeApp as FirebaseWeb } from "firebase/app";
 import { initializeApp as FirebaseAdmin, applicationDefault } from "firebase-admin/app";
 
 import SignInService from "./services/SignInService.js";
+import SpotifyOAuthService from "./services/SpotifyOAuthService.js";
+import SpotifyTokenService from "./services/SpotifyTokenService.js";
 import TokenService from "./services/TokenService.js";
 
 FirebaseAdmin({ credential: applicationDefault() });
@@ -22,6 +24,8 @@ if (NODE_ENV !== 'production')
     app.use(cors());
 
 app.use(SignInService);
+app.use(SpotifyOAuthService);
+app.use(SpotifyTokenService);
 app.use(TokenService);
 
 const PORT = process.env['PORT'] || 3001;
