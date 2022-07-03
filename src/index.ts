@@ -10,6 +10,7 @@ import SignInService from "./services/SignInService.js";
 import SpotifyOAuthService from "./services/SpotifyOAuthService.js";
 import SpotifyTokenService from "./services/SpotifyTokenService.js";
 import TokenService from "./services/TokenService.js";
+import UserService from "./services/UserService.js";
 
 FirebaseAdmin({ credential: applicationDefault() });
 FirebaseWeb({ apiKey: process.env['FIREBASE_API_KEY'] });
@@ -27,6 +28,7 @@ app.use(SignInService);
 app.use(SpotifyOAuthService);
 app.use(SpotifyTokenService);
 app.use(TokenService);
+app.use(UserService);
 
 const PORT = process.env['PORT'] || 3001;
 const server = app.listen(PORT, () => {
